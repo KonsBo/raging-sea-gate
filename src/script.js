@@ -76,7 +76,7 @@ const portalLightMaterial = new THREE.ShaderMaterial({
  */
 let gateR; // Declare a variable to store the gateR model
 
-gltfLoader.load("gateR.glb", (gltf) => {
+gltfLoader.load("gateRtest.glb", (gltf) => {
   gateR = gltf.scene; // Assign the loaded model to gateR
   scene.add(gateR);
 
