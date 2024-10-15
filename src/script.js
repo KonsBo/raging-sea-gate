@@ -49,7 +49,7 @@ const bakedMaterial = new THREE.MeshBasicMaterial({ map: bakedTexture });
 
 // Portal light material
 debugObject.portalColorStart = "#dcb2b2";
-debugObject.portalColorEnd = "#2D325A";
+debugObject.portalColorEnd = "#2c304e";
 
 gui.addColor(debugObject, "portalColorStart").onChange(() => {
   portalLightMaterial.uniforms.uColorStart.value.set(
@@ -89,7 +89,7 @@ gltfLoader.load("gateRtest.glb", (gltf) => {
   // Change the color of bakedMesh (assuming it uses MeshStandardMaterial)
   bakedMesh.material = new THREE.MeshStandardMaterial({
     map: bakedTexture, // If baked texture is used
-    color: new THREE.Color("#151c37"),
+    color: new THREE.Color("#2c1a3a"),
   });
 
   // Change the size (scale) of the entire model
