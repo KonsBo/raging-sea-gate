@@ -102,20 +102,20 @@ gltfLoader.load("gateRtest.glb", (gltf) => {
  * Water
  */
 // Geometry
-const waterGeometry = new THREE.PlaneGeometry(4, 4, 512, 512);
-waterGeometry.deleteAttribute("normal");
-waterGeometry.deleteAttribute("uv");
+// const waterGeometry = new THREE.PlaneGeometry(4, 4, 512, 512);
+// waterGeometry.deleteAttribute("normal");
+// waterGeometry.deleteAttribute("uv");
 
-// Colors
-debugObject.depthColor = "#ff4000";
-debugObject.surfaceColor = "#151c37";
+// // Colors
+// debugObject.depthColor = "#ff4000";
+// debugObject.surfaceColor = "#151c37";
 
-gui.addColor(debugObject, "depthColor").onChange(() => {
-  waterMaterial.uniforms.uDepthColor.value.set(debugObject.depthColor);
-});
-gui.addColor(debugObject, "surfaceColor").onChange(() => {
-  waterMaterial.uniforms.uSurfaceColor.value.set(debugObject.surfaceColor);
-});
+// gui.addColor(debugObject, "depthColor").onChange(() => {
+//   waterMaterial.uniforms.uDepthColor.value.set(debugObject.depthColor);
+// });
+// gui.addColor(debugObject, "surfaceColor").onChange(() => {
+//   waterMaterial.uniforms.uSurfaceColor.value.set(debugObject.surfaceColor);
+// });
 
 // Create a CubeRenderTarget for dynamic environment mapping
 const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(256);
@@ -132,30 +132,30 @@ const reflectiveMaterial = new THREE.MeshPhysicalMaterial({
   envMapIntensity: 4.0,
 });
 
-// Material
-const waterMaterial = new THREE.ShaderMaterial({
-  vertexShader: waterVertexShader,
-  fragmentShader: waterFragmentShader,
-  uniforms: {
-    uTime: { value: 0 },
-    uBigWavesElevation: { value: 0.2 },
-    uBigWavesFrequency: { value: new THREE.Vector2(4, 1.5) },
-    uBigWavesSpeed: { value: 0.75 },
-    uSmallWavesElevation: { value: 0.15 },
-    uSmallWavesFrequency: { value: 3 },
-    uSmallWavesSpeed: { value: 0.2 },
-    uSmallIterations: { value: 4 },
-    uDepthColor: { value: new THREE.Color(debugObject.depthColor) },
-    uSurfaceColor: { value: new THREE.Color(debugObject.surfaceColor) },
-    uColorOffset: { value: 0.925 },
-    uColorMultiplier: { value: 1 },
-  },
-});
+// // Material
+// const waterMaterial = new THREE.ShaderMaterial({
+//   vertexShader: waterVertexShader,
+//   fragmentShader: waterFragmentShader,
+//   uniforms: {
+//     uTime: { value: 0 },
+//     uBigWavesElevation: { value: 0.2 },
+//     uBigWavesFrequency: { value: new THREE.Vector2(4, 1.5) },
+//     uBigWavesSpeed: { value: 0.75 },
+//     uSmallWavesElevation: { value: 0.15 },
+//     uSmallWavesFrequency: { value: 3 },
+//     uSmallWavesSpeed: { value: 0.2 },
+//     uSmallIterations: { value: 4 },
+//     uDepthColor: { value: new THREE.Color(debugObject.depthColor) },
+//     uSurfaceColor: { value: new THREE.Color(debugObject.surfaceColor) },
+//     uColorOffset: { value: 0.925 },
+//     uColorMultiplier: { value: 1 },
+//   },
+// });
 
-// Mesh
-const water = new THREE.Mesh(waterGeometry, waterMaterial);
-water.rotation.x = -Math.PI * 0.5;
-scene.add(water);
+// // Mesh
+// const water = new THREE.Mesh(waterGeometry, waterMaterial);
+// water.rotation.x = -Math.PI * 0.5;
+// scene.add(water);
 
 /**
  * Sizes
@@ -165,20 +165,20 @@ const sizes = {
   height: window.innerHeight,
 };
 
-function getWaveElevationAtPosition(position, time) {
-  const bigWaveX = Math.sin(
-    position.x * waterMaterial.uniforms.uBigWavesFrequency.value.x +
-      time * waterMaterial.uniforms.uBigWavesSpeed.value
-  );
-  const bigWaveZ = Math.sin(
-    position.z * waterMaterial.uniforms.uBigWavesFrequency.value.y +
-      time * waterMaterial.uniforms.uBigWavesSpeed.value
-  );
-  let elevation =
-    bigWaveX * bigWaveZ * waterMaterial.uniforms.uBigWavesElevation.value;
+// function getWaveElevationAtPosition(position, time) {
+//   const bigWaveX = Math.sin(
+//     position.x * waterMaterial.uniforms.uBigWavesFrequency.value.x +
+//       time * waterMaterial.uniforms.uBigWavesSpeed.value
+//   );
+//   const bigWaveZ = Math.sin(
+//     position.z * waterMaterial.uniforms.uBigWavesFrequency.value.y +
+//       time * waterMaterial.uniforms.uBigWavesSpeed.value
+//   );
+//   let elevation =
+//     bigWaveX * bigWaveZ * waterMaterial.uniforms.uBigWavesElevation.value;
 
-  return elevation;
-}
+//   return elevation;
+// }
 
 window.addEventListener("resize", () => {
   sizes.width = window.innerWidth;
@@ -232,19 +232,19 @@ const tick = () => {
   cubeCamera.update(renderer, scene); // Make sure this comes first
 
   // Water
-  waterMaterial.uniforms.uTime.value = elapsedTime;
+  // waterMaterial.uniforms.uTime.value = elapsedTime;
 
   // Update materials
   portalLightMaterial.uniforms.uTime.value = elapsedTime;
 
   // If gateR is loaded, update its position based on the water flow
-  if (gateR) {
-    const waveElevation = getWaveElevationAtPosition(
-      gateR.position,
-      elapsedTime
-    );
-    gateR.position.y = waveElevation; // Update the Y position based on the wave elevation
-  }
+  // if (gateR) {
+  //   const waveElevation = getWaveElevationAtPosition(
+  //     gateR.position,
+  //     elapsedTime
+  //   );
+  //   gateR.position.y = waveElevation; // Update the Y position based on the wave elevation
+  // }
 
   // Update controls
   controls.update();
